@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="HandheldFriendly" content="true">
+<!--[if lt IE 9]>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+	<script src="//code.jquery.com/jquery-2.0.3.js"></script>
+<!--<![endif]-->
+        <title>GR OpenPO</title>
+<!--        [if IE]
+            <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        [endif]-->
+        <script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-2.0.3.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/frameworks/datajs-1.1.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-1.9.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-ui-1.10.3.custom.js"></script>
+        <link href="stylesheets/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" charset="utf-8" src="js/gulfmark/Controller.js?version=1.0.0.2"></script>
+        <script type="text/javascript" charset="utf-8" src="js/frameworks/json2.js"></script>
+         <link href="stylesheets/invoice-home.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/fonts.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                   <link href="stylesheets/model.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+                   <link href="stylesheets/invoice-details.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+                    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+                    
+                    <script>
+                      
+                       $(function() {
+                         $( "#receiptDate" ).datepicker();
+                         $( "#format" ).change(function() {
+                         });
+                         });
+                         
+                    </script>
+                    <link href="stylesheets/screenC.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    
+</head>
+    <body class="bodyclass">
+      
+        <div class="section-loader"></div>
+        <img src="images/section-loader.gif" id="section-loader" style="display:none;">
+        
+                <section id="homeWrapper" class="wrapper">
+                    <header class="main-header">
+<!--                    <a href="https://nwdev.gulfmark.com:8080/ContainerApplication-1.0/index.html#appstore" class="appstore-btn">App Store</a>-->
+                    <h1 class="logo">Gyansys Offshore</h1>
+                    <a id="logOut" href='javascript:createAlertMessage("Logout","Are you sure you want to Logout?","logOut","confirm","e")' class="logut-btn">Logout</a>
+                    
+                    </header>
+                    <div class="info-bar" id="heading" style="text-align: center;">Open PO for Gyansys</div>
+                    <section class="content-area" style="">
+                        <div class="content-container clearfix" style="overflow-y: scroll;">
+                            <div class="scrollable-area" id="maindiv" style="height: initial;">
+			            <table class="invoice-table">
+                                        <tr>
+                                            <th>Receipt Date</th>
+                                            <td class="seperator">:</td>
+                                         <!--   <td id="invoiceNo"><input style="box-sizing: border-box;border: solid 1px rgba(0,0,0,0.14);border-radius: 4px;font: 1em Arial, Helvetica, sans-serif;font-size: 80%;width: 155px;" type="date" id="receiptDate" /></td> -->
+                                         <td id="invoiceNo"><p><input style="box-sizing: border-box;border: solid 1px rgba(0,0,0,0.14);border-radius: 2px;font: 1em Arial, Helvetica, sans-serif;font-size: 80%;width: 155px;" type="text" id="receiptDate"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Receiver ID</th>
+                                            <td class="seperator">:</td>
+                                            <td id="invoiceDate"><input style="box-sizing: border-box;border: solid 1px rgba(0,0,0,0.14);border-radius: 4px;font: 1em Arial, Helvetica, sans-serif;font-size: 80%;width: 155px;" type="text" name="receiverid" id="receiverid"></td>                                        </tr>
+                                    </table>
+                                
+                                <div>&nbsp;</div>
+                                <div style="padding-bottom: 2%;">
+                                    <button id="openporeceived" class="btnreceived" onclick="ExpandAll()" style="cursor:pointer;margin-right: 2%;background-color: #2f66b1;color: #fff;border: solid 1px #1c60ba;border-radius: 3px;font-size: 1.025em;font-weight: bold;background-image: -webkit-linear-gradient(bottom, #2f66b1 50%,#4378ba 50%,#6796ca);text-align: center;">Expand All</button>
+                                    <button id="openporeset" class="btnreset" onclick="CollapseAll()" style="cursor:pointer;background-color: #2f66b1;color: #fff;border: solid 1px #1c60ba;border-radius: 3px;font-size: 1.025em;font-weight: bold;background-image: -webkit-linear-gradient(bottom, #2f66b1 50%,#4378ba 50%,#6796ca);text-align: center;">Collapse All</button>
+<!--                                    <input id="hide" type="button" value="Hide 3rd Column"/>-->
+                                </div>
+                                <table class="main-grid-view" style="" id ="openpomaintbl">
+                                    <thead>
+                                        <tr id="trtoggle">
+                                            <th class="clikable" style="width:10%; align:centre"><span id="openpochk"></span></th>
+                                            <th id="ponumber"><span>PO Number</span><i id="sort-0" class="icon-arrow-down active"></i></th>
+                                            <th><span>Doc/PR</span><i id="sort-0" class="icon-arrow-down"></i></th>
+                                            <th id="openpodate"><span id="invDate">PO Date</span><i id="sort-0" class="icon-arrow-down"></i></th>
+                                            <th><span>Vendor</span><i id="sort-0" class="icon-arrow-down"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="GROpenPOprttbl"></tbody>
+                               </table>
+                                 <div style="text-align:center;padding-top: 1%;">
+                                    <button id="openporeceived" onclick="OpenPoConfirmation()" class="btnreceived" style="cursor:pointer;margin-right: 2%;background-color: #2f66b1;color: #fff;border: solid 1px #1c60ba;border-radius: 3px;font-size: 1.025em;font-weight: bold;background-image: -webkit-linear-gradient(bottom, #2f66b1 50%,#4378ba 50%,#6796ca);text-align: center;">Receive</button>
+                                    <button id="openporeset" onclick="ResetValues()" class="btnreceived" style="cursor:pointer;background-color: #2f66b1;color: #fff;border: solid 1px #1c60ba;border-radius: 3px;font-size: 1.025em;font-weight: bold;background-image: -webkit-linear-gradient(bottom, #2f66b1 50%,#4378ba 50%,#6796ca);text-align: center;">Reset</button>
+                                </div> 
+                                </div>
+                          
+                                <div id="noItems" style="display: none; padding: 45px 0; text-align: center;">No Items to display</div>
+                            </div>
+                        </div>
+                    </section><!-- .content-area -->
+                    <div class="model-screen">
+                        <div class="model-container" id="alertbox">
+                            <header><span id="header">Logout</span></header>
+                            <div class="model-body clearfix">
+                                <h5 id="alertMessage">Are you sure you want to logout?</h5>
+                                <input id="ok" type="submit" class="submit-btn" value="OK" />
+                                <input id="cancelAlert" type="submit" class="cancel-btn" value="Cancel" />
+                            </div>
+                        </div>
+                    </div><!-- .model-screen -->
+                </section><!-- .wraapper -->
+                <!--<div class="page-overlay"><span>Please <a href="#">Login</a> to view</span></div>-->       
+      
+    </body>
+  
+</html>

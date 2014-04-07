@@ -1,0 +1,399 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>GR PO Details</title>
+        <!--[if IE]>
+            <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <![endif]-->
+<!--        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-2.0.3.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/frameworks/datajs-1.1.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-1.9.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/frameworks/jquery-ui-1.10.3.custom.js"></script>
+<link href="stylesheets/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+        <script> 
+//            OData.read( 
+//				  
+//		  "https://192.168.2.133:8080/sap/inv/opu/odata/sap/ZMM_CM_GR_OPENPO/zmm_gr_openpoCollection(bednr='',ponumber='4500093621')/poitems_r",
+//		  
+//		  function (data1) { 
+//		     
+//		    var table = "<table border = '1'>";
+//		    		    
+//
+//		    $.each(data1.results, function(ix, l) 
+//		    		{ 
+//                               
+//		    		table+="<tr><td>"+ l.menge + "</td>"+ "<td>"+l.meins+ "</td>"+ "<td>"+ l.txz01 +"</td>"+ "<td>"+l.ebelp +"</td>" +"</tr>";
+//		    		
+//		    		}); 
+//		    		
+//		    	
+//		    	table+="</table>";	
+//		    $(table).appendTo($("tbody")); 
+//		  } 
+//		);
+		
+		//Script is for item details based on user
+//		var username = localStorage.getItem("username");
+//		var ponumber = localStorage.getItem("ponumber");
+//		var wi_id = localStorage.getItem("wi_id");
+//                //localStorage.setItem("requname", requname);
+//                
+//                var ebeln = localStorage.getItem("ebeln");
+		
+		/* alert(username + " - " + ponumber); */
+		
+	    
+//	     $.ajax({
+//	    	 
+//	       url: "https://nwdev.gulfmark.com/sap/opu/odata/sap/ZMM_CM_GR_POITEM/zmm_dm_gr_poitemCollection?$filter=ebeln%20eq'4500000173'",
+//	      type: 'GET',
+//	        contentType: "application/xml;charset=utf-8",
+//	        dataType: "text",
+//	        cache:false,
+//	        success: function (data) {
+//	        	$(data).find("content").each(function () {  
+//	        		  $(this).find("m\\:properties, properties").each(function(){
+//	                	var $info = $(this);
+//	                	var netwr = $info.find("d\\:netwr, netwr").text();
+//	                	var bsart = $info.find("d\\:bsart, bsart").text();
+//	                	var ebeln = $info.find("d\\:ebeln, ebeln").text();
+//	                	var lifnr = $info.find("d\\:lifnr, lifnr").text();
+//	                  	var ernam = $info.find("d\\:ernam, ernam").text();
+//	                  	var requname = $info.find("d\\:requname, requname").text();
+//                                var requestor = $info.find("d\\:requestor, requestor").text();
+//                                
+//                                localStorage.setItem("requname", requname);
+//	                	if(ebeln == ponumber) {
+//	                		$("#txtNetwr").html(netwr);
+//		                	$("#txtBsart").html(bsart);	
+//		                	$("#lifnr").html(lifnr);
+//		                  	$("#ernam").html(ernam);
+//		                  	$("#requname").html(requname);
+//                                        $("#txtebeln").html(ebeln);
+//                                        $("#requestor").html(requestor);
+//                                        
+//	                	}
+//	                	
+//	               });
+//	            });
+//	        }, 
+//	        error: function (XMLHttpRequest, textStatus, errorThrown) {
+//	            alert("Could not connect URL...!");
+//	        }
+//	    });
+var ebeln = localStorage.getItem("ebeln");
+var zz_tmdocno = localStorage.getItem("zz_tmdocno");
+var bedat = localStorage.getItem("bedat");
+var zvendor = localStorage.getItem("zvendor");
+	var xml;   
+     $.ajax(
+             alert("Inside Ajax"),
+             {
+         
+    	url: "https://192.168.2.133:8080/sap/inv/opu/odata/sap/ZMM_CM_GR_OPENPO/zmm_gr_openpoCollection(bednr='',ponumber='"+ebeln+"')/poitems_r",
+        
+ 		type: 'GET',
+	        contentType: "application/xml;charset=utf-8",
+	        dataType: "text",
+	        cache:false,
+ 
+ 
+        success: function (data) {
+        	alert("Inside success");
+        	$(data).find("content").each(function () {  
+      		  $(this).find("m\\:properties, properties").each(function(){
+              	var $info = $(this);
+              	var ebelp = $info.find("d\\:ebelp, ebelp").text();
+              	var txz01 = $info.find("d\\:txz01, txz01").text();
+              	var menge = $info.find("d\\:menge, menge").text();
+              	var meins = $info.find("d\\:meins, meins").text();
+//              	var zz_tmdocno = $info.find("d\\:zz_tmdocno, zz_tmdocno").text();
+//                var ebeln = $info.find("d\\:ebeln, ebeln").text();
+              	
+              	//var ebeln = $info.find("d\\:ebeln,ebeln").text();
+              	
+//            	if(ebeln == ponumber) {
+            		/* $("#description").html(txz01);
+                  	
+                  	$("#shipto").html(werks);
+                  	$("#quantity").html(menge);
+                  	$("#totalcost").html(netpr); */
+                     
+            		$('tbody').append('<tr><td><input type="checkbox" class = "chcktbl" /></td><td>'+ebelp+'</td><td>'+txz01+'</td><td>'+menge+'</td><td>'+meins+'</td></tr>');
+                  	//$("#deliverydate").html(eindt);
+                       // localStorage.setItem("werks", werks);
+                  //<td onclick="showPlantDetails('+werks+')"><u><b>'+werks+'</b></u></td>	
+//            	}
+                });
+            });
+        }, 
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Could not connect URL...!");
+        }
+    });
+//    
+//  
+////     function showVendorDetails(id)
+////     {
+////    	 localStorage.setItem("lifnr", id);
+////    	 window.location = "PO-vendordetails1.html";
+////     }
+////     
+////    function showRequestor(id)
+////    {
+////    	localStorage.setItem("requname",id);
+////    	window.location = "PO-requesterdetails1.html";
+////    }
+//	function showGRPOConfirm()
+//	{
+//	//localStorage.setItem("werks",id);
+//    	window.location = "GRPOConfirm.html";	
+//   }
+//    
+//    function approve(){
+//   	 
+//   	 if(username != "" && ponumber != "" ){
+//			$.ajax({
+//		    	 
+//			     //url: "proxy/http/gyansys3.gyansys.com:8003/sap/opu/odata/sap/ZPO_CM_ITEMDETAILS/zpo_itemdetailsCollection(value='"+value+"',username='"+username+"',comments='',ponumber='"+ponumber+"')/return_r",
+//			     url: "http://50.194.79.188:8080/sap/inv/opu/odata/sap/ZPO_CM_APPROVAL/zpo_approvalCollection(username='"+ username +"',comments='',wi_id='"+ wi_id +"',ebeln='"+ponumber+"')/return_r",
+//			      type: 'GET',
+//	        contentType: "application/xml;charset=utf-8",
+//	        dataType: "text",
+//	        cache:false,
+//			        success: function (data) {
+//                                   // var txz01 = $info.find("d\\:txz01, txz01").text();
+//			        	$(data).find("content").each(function () {  
+//			        		  $(this).find("m\\:properties, properties").each(function(){
+//			                	var $info = $(this);
+////			                	var message = $info.find('message').text();
+////			                	var comments = $info.find('comments').text();
+////			                	var ebeln = $info.find('ebeln').text();
+//                                                
+//                                                var message = $info.find("d\\:message, message").text();
+//			                	var comments = $info.find("d\\:comments, comments").text();
+//			                	var ebeln = $info.find("d\\:ebeln, ebeln").text();
+//			                	
+//			                	 if(ebeln == ponumber) {
+//			                		
+//			                		$("#comments").html(comments);
+//				                alert("message: " + message);
+//			                	window.location = "PO-listview.html";
+//			                	location.refresh();
+//			                	 } 
+//			               });
+//			            });
+//			        }, 
+//			        error: function (XMLHttpRequest, textStatus, errorThrown) {
+//			            alert("Could not connect URL...!");
+//			        }
+//			    });
+//   	 
+//    }
+//    }
+//   
+//    function reject(){
+//    	
+//    	//alert("testing reject function");
+//   	
+//			$.ajax({
+//		    	 
+//			     url: "http://50.194.79.188:8080/sap/inv/opu/odata/sap/ZPO_CM_ITEMDETAILS/zpo_itemdetailsCollection(po_num='"+ ponumber +"',wi_id='',p_username='"+ username +"',comments='',ponumber='')/return_r",
+//			      type: 'GET',
+//	        contentType: "application/xml;charset=utf-8",
+//	        dataType: "text",
+//	        cache:false,
+//			        success: function (data) {
+//			        	$(data).find("content").each(function () {  
+//			        		  $(this).find("m\\:properties, properties").each(function(){
+//			                	var $info = $(this);
+//			                	var message = $info.find('message').text();
+//			                	var comments = $info.find('comments').text();
+//			                	var po_num = $info.find('po_num').text();
+//			                	var wi_id = $info.find('wi_id').text();
+//			                	
+//			                	 if(po_num == ponumber) {
+//			                		$("#Comments").html(comments);
+//				                	$("#Wi_id").html(wi_id);
+//				                	//alert('Textbox value " + Server.HtmlEncode(txtYourTextBox.Text) + "');
+//				               // var retVal = prompt("Comments ", "");
+//				               // alert("Comments: " +  retVal );
+//				                alert("message: " + message);
+//			                	window.location = "PO-listview.html";
+//			                	location.refresh();
+//			                	 } 
+//			               });
+//			            });
+//			        }, 
+//			        error: function (XMLHttpRequest, textStatus, errorThrown) {
+//			            alert("Could not connect URL...!");
+//			        }
+//			    });
+//    }
+//      	
+//    function showHide(divId){
+//        var commentsDiv = document.getElementById(divId);
+//        if(commentsDiv.style.display=="none"){
+//            commentsDiv.style.display="";
+//        }else{
+//            commentsDiv.style.display="none";
+//        }    
+//    }
+//    
+//    $(function(){
+//        $("#hidethis").hide();
+//        $(".commentsOK").on("click", function(){
+//            prompt("Comments ", "");
+//			alert("Comments: " +  comments ); 
+//        });
+//    });
+//    
+//    function rejectcomments(comments) {
+//        alert("Hello, " + comments );
+//    }
+ </script> 
+    </head>
+    <body>
+        <div class="mainContainer">
+            <div class="wrapperClass">
+                <section id="detailsWrapper" class="wrapper">
+                    <!--<link href="stylesheets/invoice-details.css" media="screen, projection" rel="stylesheet" type="text/css" />-->
+                    <link href="stylesheets/invoice-home.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/screenC.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/fonts.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/invoice-details.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    <link href="stylesheets/model.css" media="screen, projection" rel="stylesheet" type="text/css" />
+                    
+                    <header class="main-header clearfix">
+                        <a id="back" href="#" onclick="location.href='GROpenPO.html'" class="back-btn">Back</a>
+                        <h1 class="logo">Gulf Mark Offshore</h1>
+<!--                        <div id="print-share" class="print-share">
+                            <a id="share" href="#invDetails" class="switch-btn">Share</a>
+                            <div class="btns-container">
+                                <a id="print" href="#invDetails" class="print-btn">Print</a>
+                                <a id="mail" href="#email" class="mail-btn">Mail</a>
+                            </div>
+                        </div> .print-share -->
+
+                        <a id="logOut" href="#" class="logut-btn">Logout</a>
+                    </header>
+                    <div id="companyInfo" class="info-bar" style="padding-left: 30%"> 
+                        <button id="PODetailsbtn" class="tab-view" style="margin: auto;width: 50%;height:50px !important; text-align: center;width: 50%;float: left;margin: auto;
+                        width: 50%;
+                        height: 50px !important;
+                        text-align: right;
+                        width: 50%;
+                        float: left;
+                        background-color: #0d508a;
+                        padding: 10px 18px;
+                        border-width: 1px 1px 1px 0;
+                        background-image: -webkit-linear-gradient(bottom, #0d508a,#256eac);
+                        border: solid 1px #0a3d7b;
+                        color: #fff;
+                        text-shadow: 1px 1px rgba(0,0,0,0.53);">PO Details</button>
+<!--                        <ul class="tab-view" style="margin: auto;width: 50%;height:0 !important;">
+                                    <li id="inboxMainBlock1" class="active" style="text-align: center;width: 50%;float: left;" ><a id="inboxCount1" href="#invInbox" style="padding: 10px 18px;border-width: 1px 1px 1px 0;">PO Details</a></li>
+                                    <li id="approvedMainBlock"><a href="#invApproved">Approved</a></li>
+                                    <li id="rejectedMainBlock"><a href="#invRejected">Rejected</a></li>
+                                </ul>-->
+                    </div><!-- .info-bar -->
+                    <section class="content-area">
+                        <div id="printHead" class="printHead"></div>
+                        <div class="content-container" style="height:500px;">
+                            <div class="scrollable-area">
+                                <div class="invoice-container clearfix">
+                                    <table>
+<!--                                        <tr>
+                                            <th>PO NO #</th>
+                                            <td>:</td>
+                                            <td></td>
+                                        </tr>-->
+                                        <tr>
+                                            <th>Document No#</th>
+                                            <td>:</td>
+                                            <td></td>
+                                        </tr><!--
+                                        <tr>
+                                            <th>Document Date</th>
+                                            <td>:</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Posting Date</th>
+                                            <td class="seperator">:</td>
+                                            <td id="postingDate"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <td>:</td>
+                                            <td></td>
+                                        </tr>-->
+<!--                                        <tr>
+                                            <th>Amount</th>
+                                            <td class="seperator">:</td>
+                                            <td id="totalAmount"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>SAP Document #</th>
+                                            <td class="seperator">:</td>
+                                            <td id="sapDocNo"></td>
+                                        </tr>-->
+                                         <mbody>
+                                    </mbody>
+                                    </table>
+<!--                                    <a href="#" id="view-invoice-btn01" class="view-button">View Invoice</a>-->
+                                </div>
+<!--                                <h3 class="table-title">Item Details</h3>-->
+                               <div>
+                                <table class="main-grid-view">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id = "chckHead" /></th>
+                                            <th width="25%">Ln</th>
+                                            <th width="25%">Description</th>
+                                            <th width="25%" align="right">Qty</th>
+                                            <th width="25%">Unit</th>
+                                        </tr>
+                                    </thead>
+                                   <tbody>
+                                    </tbody>
+                                </table>
+                               </div>
+                                <div style="padding-left: 25%;padding-top: 20%;">
+                                    <button id="approve" class="approve-btn" style="margin-right: 40%">Received</button>
+                                
+                                
+                                    <button id="reject" class="reject-btn">Cancel</button>
+                                </div>
+                                <div style="clear: both; display: block;"></div>
+                                <div class="section-loader"></div>
+                                <img src="images/section-loader.gif" style="display: none;"/>
+                            </div>
+                        </div>
+                    </section><!-- .content-area -->
+                    <div class="model-screen">
+                        <div class="model-container">
+                            <header><span id="header">Logout</span></header>
+                            <div class="model-body clearfix">
+                                <h5 id="alertMessage">Are you sure you want to logout?</h5>
+                                <input id="ok" type="submit" class="submit-btn" value="OK" />
+                                <input id="cancelAlert" type="submit" class="cancel-btn" value="Cancel" />
+                            </div>
+                        </div>
+                    </div><!-- .model-screen -->
+                </section><!-- .wraapper -->
+                <!--<div class="page-overlay"><span>Please <a href="#">Login</a> to view</span></div>-->
+            </div></div>
+    </body>
+</html>
